@@ -21,7 +21,7 @@ pipeline {
 
         stage('Git Checkout') {
             steps {
-                git credentialsId: 'git-token', url: 'https://github.com/akkivats777/Netflix_Node.git', branch: 'main'
+                git credentialsId: 'git-token', url: 'https://github.com/Open-Source-Git-Codes/4_Netflix_Node_NGINX.git', branch: 'main'
             }
         }
 
@@ -137,10 +137,10 @@ pipeline {
 
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = "Netflix_Node.git"
+                GIT_REPO_NAME = "4_Netflix_Node_NGINX.git"
                 GIT_USER_NAME = "akkivats777"
                 GIT_USER_EMAIL = "aakashsharma8527@gmail.com"
-                GIT_ORG_NAME = "akkivats777"
+                GIT_ORG_NAME = "Open-Source-Git-Codes"
             }
             steps {
                 dir('./manifests') {
@@ -151,7 +151,7 @@ pipeline {
 
                             # Pull the latest changes from the repository (main branch)
                             # Explicitly use the GitHub token for authentication in the URL
-                            git pull https://${GITHUB_TOKEN}@github.com/$GIT_USER_NAME/$GIT_REPO_NAME main --rebase || git rebase --abort
+                            git pull https://${GITHUB_TOKEN}@github.com/$GIT_ORG_NAME/$GIT_REPO_NAME main --rebase || git rebase --abort
 
                             # Update the image tag in the deployment.yaml file
                             sed -i "s|image: akkivats777/ekart:[^ ]*|image: akkivats777/ekart:${BUILD_NUMBER}|g" deployment.yaml
@@ -163,7 +163,7 @@ pipeline {
                                 git commit -m "Update deployment Image to version ${BUILD_NUMBER}"
                             )
                             # Push the changes back to GitHub (main branch)
-                            git push https://${GITHUB_TOKEN}@github.com/$GIT_USER_NAME/$GIT_REPO_NAME HEAD:main
+                            git push https://${GITHUB_TOKEN}@github.com/$GIT_ORG_NAME/$GIT_REPO_NAME HEAD:main
                         '''
                     }
                 }
