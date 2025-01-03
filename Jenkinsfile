@@ -153,8 +153,8 @@ pipeline {
                             git pull https://${GITHUB_TOKEN}@github.com/$GIT_ORG_NAME/$GIT_REPO_NAME main --rebase || git rebase --abort
 
                             # Update the image tag in the deployment.yaml file
-                            sed -i "s|image: akkivats777/ekart:[^ ]*|image: akkivats777/ekart:${BUILD_NUMBER}|g" deployment.yaml
-                            echo "Updated Image Tag to akkivats777/ekart:${BUILD_NUMBER}"
+                            sed -i "s|image: akkivats777/netflix:[^ ]*|image: akkivats777/netflix:${BUILD_NUMBER}|g" deployment.yaml
+                            echo "Updated Image Tag to akkivats777/netflix:${BUILD_NUMBER}"
 
                             # Check if there are changes before committing
                             git diff --quiet deployment.yaml || (
