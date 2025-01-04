@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: netflix-app
-        image: akkivats777/netflix:4
+        image: akkivats777/netflix:5
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
